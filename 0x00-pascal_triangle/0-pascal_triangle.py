@@ -1,17 +1,19 @@
 #!/usr/bin/python3
 
 def pascal_triangle(n):
-    """Computes Pascal Triangle"""
-    result = []
     if n <= 0:
-        return result
-    for i in range(n):
-        if len(result) == 0:
-            result.append([1])
-        else:
-            row = [1]
-            for j in range(1, len(result[-1])):
-                row.append(result[-1][j] + result[-1][j - 1])
-            row.append(1)
-            result.append(row)
-    return result
+        return []
+
+    triangle = [[1]]  # Start with the first row
+
+    for i in range(1, n):
+        previous_row = triangle[i - 1]
+        current_row = [1]  # First element of each row is always 1
+
+        for j in range(1, i):
+            current_row.append(previous_row[j - 1] + previous_row[j])
+
+        current_row.append(1)  # Last element of each row is always 1
+        triangle.append(current_row)
+
+    return triangle
